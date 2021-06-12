@@ -22,7 +22,6 @@ jobs:
     steps:
       - name: Run script
         run: mvn compile
-        working-directory: -Dmaven.repo.local=./.m2/repository
         
   test:
     runs-on: self-hosted
@@ -30,7 +29,6 @@ jobs:
     steps:
       - name: Run test
         run: mvn test
-        working-directory: -Dmaven.repo.local=./.m2/repository
 
   package:
     runs-on: self-hosted
@@ -38,7 +36,6 @@ jobs:
     steps:
       - name: Run package
         run: mvn package
-        working-directory: -Dmaven.repo.local=./.m2/repository
         
   deploy_test:
     runs-on: self-hosted
