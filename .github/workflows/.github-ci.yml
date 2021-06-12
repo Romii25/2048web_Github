@@ -34,29 +34,30 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-      - uses: actions/checkout@v2
-      - name: Cache
-        id: cache 
-        uses: actions/cache@v2
-        with:
-          path:
-            .m2/repository
-      - name: Run test
-        run: mvn test
+    - uses: actions/checkout@v2
+      
+    - name: Cache
+      id: cache 
+      uses: actions/cache@v2
+      with:
+        path:
+          .m2/repository
+   - name: Run test
+     run: mvn test
 
   package:
     runs-on: self-hosted
     needs: build
     steps:
-      - uses: actions/checkout@v2
-      - name: Cache
-        id: cache 
-        uses: actions/cache@v2
-        with:
-          path:
-            .m2/repository
-      - name: Run package
-        run: mvn package
+    - uses: actions/checkout@v2
+    - name: Cache
+      id: cache 
+      uses: actions/cache@v2
+      with:
+        path:
+          .m2/repository
+    - name: Run package
+      run: mvn package
         
   deploy_test:
     runs-on: self-hosted
