@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-      - name: Cache
+      - name: Maven Packages Cache
         uses: actions/cache@v2
         with:
           path: $maven_packages_cache
@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v2  
       - name: Build Webapplication
         run: mvn compile
-      - name: artifacts
+      - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: target
@@ -42,7 +42,7 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-      - name: Cache
+      - name: Maven Packages Cache
         uses: actions/cache@v2
         with:
           path: $maven_packages_cache
@@ -54,14 +54,14 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-      - name: Cache
+      - name: Maven Packages Cache
         uses: actions/cache@v2
         with:
           path: $maven_packages_cache
           key: ${{ runner.os }}-build
       - name: Create war package
         run: mvn package -Dmaven.test.skip=true
-      - name: artifacts
+      - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: war
@@ -76,7 +76,7 @@ jobs:
       url: http://localhost:8081/game2048
       on_stop: stop_test
     steps:
-      - name: start game
+      - name: Start game2048
         run: cp -f ./target/game2048.war /usr/local/tomcat/webapps
      
 
