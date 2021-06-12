@@ -11,12 +11,11 @@ on:
   pull_request:
     branches: 
       - main
+      
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 env:
   maven_packages_cache: ".m2/repository"
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -76,18 +75,8 @@ jobs:
       url: http://localhost:8081/game2048
       on_stop: stop_test
     steps:
-      - name: Remove docker
-        shell: bash
-        run: docker rm --force game2048
-      - name: Remove dockerimage
-        shell: bash
-        run: docker image rm --force game2048
-      - name: Echo text
-        shell: bash
-        run: echo -e 'FROM tomcat:9.0.46-jdk11 \n COPY ./target/game2048.war /usr/local/tomcat/webapps' | docker build -t game2048 -f- .
-      - name: Run docker
-        shell: bash
-        run: docker run --rm -d --name game2048 -p 8081:8080 game2048
+      - name: start game
+        run: cp -f ./target/game2048.war /usr/local/tomcat/webapps
      
   stop_test:
     runs-on: self-hosted
