@@ -19,32 +19,23 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    container:
-      image: maven:3.8.1-jdk-11
     steps:
       - name: Run script
         run: mvn compile
-        working-directory: .m2/repository
         
   test:
     runs-on: self-hosted
     needs: build
-    container:
-      image: maven:3.8.1-jdk-11
     steps:
       - name: Run test
         run: mvn test
-        working-directory: .m2/repository
 
   package:
     runs-on: self-hosted
     needs: build
-    container:
-      image: maven:3.8.1-jdk-11
     steps:
       - name: Run package
         run: mvn package
-        working-directory: .m2/repository
         
   deploy_test:
     runs-on: self-hosted
