@@ -33,7 +33,7 @@ jobs:
       - name: Build Webapplication
         run: mvn compile
       - name: artifacts
-        uses: actions/upload-artifacts@v2
+        uses: actions/upload-artifact@v2
         with:
           name: target
           path: "target/*"  
@@ -62,7 +62,7 @@ jobs:
       - name: Create war package
         run: mvn package -Dmaven.test.skip=true
       - name: artifacts
-        uses: actions/upload-artifacts@v2
+        uses: actions/upload-artifact@v2
         with:
           name: war
           path: "target/*.war"  
