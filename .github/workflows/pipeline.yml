@@ -57,7 +57,7 @@ jobs:
           path: $maven_packages_cache
           key: ${{ runner.os }}-build
       - name: Build package file
-        run: mvn package -Dmaven.test.skip=true
+        run: mvn package
       - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -75,5 +75,3 @@ jobs:
         uses: actions/download-artifact@v2
       - name: Start game2048
         run: cp -f ./target/game2048.war /usr/local/tomcat/webapps
-     
-
